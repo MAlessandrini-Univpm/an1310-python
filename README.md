@@ -1,5 +1,5 @@
 # an1310-python
-A python implementation of the AN1310 PIC Bootloader.
+A python command-line implementation of the AN1310 PIC Bootloader.
 
 This is a simple python implementation of the AN1310 bootloader for PIC microcontrollers (see relevant application note from Microchip). The bootloader is used to program a PIC MCU through a serial port, most likely an USB-to-serial converter, provided that you have the bootloader firmware already programmed in the PIC itself.
 
@@ -16,6 +16,29 @@ Currently it only supports the PIC16F887, but see below for extensions. The proc
 In the last step a serial terminal is started on the user's side, using python package serial.tools.miniterm, so that you can exchange data with the user program, if needed, through the same connection, once the control is passed to the user program.
 
 Note: you may have warnings like "`!! ignoring address 0x2007`". This is normal if your code defines configuration bits, EEPROM initialization values, ID words or other features at virtual addresses. Those addresses are outside the actual program memory and cannot be self-written by the PIC firmware, but can only be set by an external programmer. You must set those values when you initially write the bootloader firmware to the PIC flash.
+
+Example of running the program:
+```
+$ ./an1310.py myprog.X.production.hex
+
+Using port /dev/ttyUSB0
+Reset PIC if not in bootloader mode, then press Enter...
+Connecting...
+Found device PIC16F887, bootloader v.1.5
+!! ignoring address 0x2007
+!! ignoring address 0x2008
+Writing...
+Verifying...
+Running...
+Launching serial terminal...
+--- Miniterm on /dev/ttyUSB0  19200,8,N,1 ---
+--- Quit: Ctrl+C | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+ready
+023 C
+022 C
+
+--- exit ---
+```
 
 Limitations and how to extend it
 ================================
