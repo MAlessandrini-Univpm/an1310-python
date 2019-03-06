@@ -13,7 +13,7 @@ Currently it only supports the PIC16F887, but see below for extensions. The proc
 - run user program
 - run a serial terminal to interact with the user program through the same serial port
 
-In the last step a serial terminal is started on the user's side, using python package serial.tools.miniterm, so that you can exchange data with the user program, if needed, through the same connection, once the control is passed to the user program.
+In the last step a serial terminal is started on the user's side, using python package "serial.tools.miniterm", so that you can exchange data with the user program, if needed, through the same connection, once the control is passed to the user program.
 
 Note: you may have warnings like "`!! ignoring address 0x2007`". This is normal if your code defines configuration bits, EEPROM initialization values, ID words or other features at virtual addresses. Those addresses are outside the actual program memory and cannot be self-written by the PIC firmware, but can only be set by an external programmer. You must set those values when you initially write the bootloader firmware to the PIC flash.
 
@@ -47,7 +47,7 @@ Currently only the PIC16F887 is supported. You can find a list of devices and th
 
 The program only supports devices with auto-erase of flash blocks during writing. For other devices it should be easy to implement an erase routine in addition to write.
 
-The autodetection of the serial port looks for an USB-backed port with VID/PID 0x0403,0x6015. This is an FTDI FT230X USB-to-serial converter, used in our specific board. You can easily change the VID and PID in the code, or add a different search criterion.
+The autodetection of the serial port looks for an USB-backed port with VID/PID 0x0403/0x6015. This is an FTDI FT230X USB-to-serial converter, used in our specific board. You can easily change the VID and PID in the code, or add a different search criterion.
 
 Connection to bootloader firmware is attempted with a baud rate of 115200, while the serial terminal after the user program is run is set at 19200. You can easily change them.
 
