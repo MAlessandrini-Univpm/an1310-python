@@ -3,7 +3,7 @@ A python implementation of the AN1310 PIC Bootloader
 
 This is a simple python implementation of the AN1310 bootloader for PIC microcontrollers (see relevant application note from Microchip). The bootloader is used to program a PIC MCU through a serial port, most likely an USB-to-serial converter, provided you have the bootloader firmware already programmed in the PIC itself.
 
-The program can be invoked with just the executable file as argument (in hex format) and it will try to autodetect the serial port (see below). Otherwise the you can pass the port name with `-p` parameter. Try `./an1310.py -h` for help.
+The program can be invoked with just the executable file (in hex format) as argument and it will try to autodetect the serial port (see below). Otherwise you can pass the port name with `-p` parameter. Try `./an1310.py -h` for help.
 
 Currently it only supports the PIC16F887, but see below for extensions. The procedure is as follows:
 - assert break on serial port and ask user to reset the PIC
