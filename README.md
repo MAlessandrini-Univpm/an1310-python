@@ -15,7 +15,7 @@ Currently it only supports the PIC16F887, but see below for extensions. The proc
 
 In the last step a serial terminal is started on the user's side, using python package serial.tools.miniterm, so that you can exchange data with the user program, if needed, through the same connection, once the control is passed to the user program.
 
-Note: you may have warnings like "`!! ignoring address 0x2007`"; this is normal if your code defines configuration bits, EEPROM initialization values, ID words or other features at virtual addresses. These addresses are outside the actual program memory and cannot be self-written by the PIC firmware, but can only be set by an external programmer. You must set those values when you initially write the bootloader firmware to the PIC flash.
+Note: you may have warnings like "`!! ignoring address 0x2007`". This is normal if your code defines configuration bits, EEPROM initialization values, ID words or other features at virtual addresses. Those addresses are outside the actual program memory and cannot be self-written by the PIC firmware, but can only be set by an external programmer. You must set those values when you initially write the bootloader firmware to the PIC flash.
 
 Limitations and how to extend it
 ================================
