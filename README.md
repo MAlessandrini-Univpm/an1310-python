@@ -1,11 +1,13 @@
 # an1310-python
-A python command-line implementation of the AN1310 PIC Bootloader.
+A python command-line implementation of the AN1310 Bootloader for PIC16 microcontrollers.
 
-This is a simple python implementation of the AN1310 bootloader for PIC microcontrollers (see relevant application note from Microchip). The bootloader is used to program a PIC MCU through a serial port, most likely an USB-to-serial converter, provided that you have the bootloader firmware already programmed in the PIC itself.
+This is a simple python implementation of the AN1310 bootloader for PIC16 microcontrollers (see relevant application note from Microchip). The bootloader is used to program a PIC MCU through a serial port, most likely an USB-to-serial converter, provided that you have the bootloader firmware already programmed in the PIC itself.
 
 The program can be invoked with just the executable file (in hex format) as argument and it will try to autodetect the serial port (see below). Otherwise you can pass the port name with `-p` parameter. Try `./an1310.py -h` for help.
 
-Currently it only supports the PIC16F887, but see below for extensions. The procedure is as follows:
+Currently only the PIC16F887 is supported and tested, but the program can easily be extended to other devices (see below).
+
+The bootloading procedure is as follows:
 - assert break on serial port and ask user to reset the PIC
 - connect to bootloader firmware (stop here if no hex file given)
 - write user program
@@ -43,11 +45,11 @@ ready
 Limitations and how to extend it
 ================================
 
-Currently only the PIC16F887 is supported. You can find a list of devices and their features in the `device_db` variable, in turn imported from the `devices.db` sqlite file distributed with the original AN1310 source code (see comments in the code). Other devices can easily be added in the same way.
+Currently only the PIC16F887 is supported. The `device_db` variable lists the supported devices and their parameters, in turn imported from the `devices.db` SQLite database distributed with the original AN1310 source code (see comments in the code for the details). Other devices can easily be added in the same way, but currently we cannot test them.
 
-The program only supports devices with auto-erase of flash blocks during writing. For other devices it should be easy to implement an erase routine in addition to write.
+The program only supports devices with auto-erase of flash blocks during writing. Actually many PIC16 devices fall in that category, and the program will check that when connecting to the MCU, and fail otherwise. If you want to know if your device is of the auto-erase kind, you can check the corresponding include file in the MPLAB installation, for example `p16f887.inc` for PIC16F887: if a "FREE" bit is defined for EECON1 register, the device must explicitly erase flash, and so cannot be used with the program as-is. Otherwise it has no erase operation and it should be ok. For other devices it should be easy to implement an erase routine in addition to write.
 
-The autodetection of the serial port looks for an USB-backed port with VID/PID 0x0403/0x6015. This is an FTDI FT230X USB-to-serial converter, used in our specific board. You can easily change the VID and PID in the code, or add a different search criterion.
+The autodetection of the serial port looks for an USB-backed port with VID/PID 0x0403/0x6015. This corresponds with an FTDI FT230X USB-to-serial converter, used in our specific board. You can easily change the VID and PID in the code, or add a different search criterion.
 
 Connection to bootloader firmware is attempted with a baud rate of 115200, while the serial terminal after the user program is run is set at 19200. You can easily change them.
 
