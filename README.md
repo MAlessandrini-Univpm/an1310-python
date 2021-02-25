@@ -49,7 +49,7 @@ Currently only the PIC16F887 is supported. The `device_db` variable lists the su
 
 The program only supports devices with auto-erase of flash blocks during writing. Actually many PIC16 devices fall in that category, and the program will check that when connecting to the MCU, and fail otherwise. If you want to know if your device is of the auto-erase kind, you can check the corresponding include file in the MPLAB installation, for example `p16f887.inc` for PIC16F887: if a "FREE" bit is defined for EECON1 register, the device must explicitly erase flash, and so cannot be used with the program as-is. Otherwise it has no erase operation and it should be ok. For other devices it should be easy to implement an erase routine in addition to write.
 
-The autodetection of the serial port looks for an USB-backed port with VID/PID 0x0403/0x6015. This corresponds with an FTDI FT230X USB-to-serial converter, used in our specific board. You can easily change the VID and PID in the code, or add a different search criterion.
+The autodetection of the serial port looks for an USB-backed port with VID/PID 0x0403/0x6015, that is an FTDI FT230X USB-to-serial converter, used in our specific board. You can easily change the VID and PID in the code, or add a different search criterion.
 
 Connection to bootloader firmware is attempted with a baud rate of 115200, while the serial terminal after the user program is run is set at 19200. You can easily change them.
 
