@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # an1310.py
-# Copyright (C) 2019  Michele Alessandrini  [https://github.com/malessandrini/an1310-python]
+# Copyright (C) 2019  Michele Alessandrini  [https://github.com/MAlessandrini-Univpm/an1310-python]
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3
