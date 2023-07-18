@@ -207,7 +207,7 @@ class Bootloader:
 				# not aligned
 				addr = r[0] - (r[0] % self.words_erase) # correct starting address
 				if r_prev is None or (r_prev[0] + len(r_prev[1])) <= addr:
-					r[1] = [0] * (r0 - addr) + r[1]
+					r[1] = [0] * (r[0] - addr) + r[1]
 					r[0] = addr
 				elif (r_prev[0] + len(r_prev[1])) == r[0]:
 					pass  # ok, they will be merged
